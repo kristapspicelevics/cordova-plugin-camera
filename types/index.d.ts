@@ -41,6 +41,7 @@ interface Camera {
     //    cameraSuccess: (data: string) => void,
     //    cameraError: (message: string) => void,
     //    cameraOptions?: CameraOptions): CameraPopoverHandle;
+    hasCameraPermission(): Promise<boolean>;
 }
 
 interface CameraOptions {
@@ -174,4 +175,11 @@ declare var Camera: {
         ARROW_RIGHT: number;
         ARROW_ANY: number;
     }
+
+    getPicture(options?: CameraOptions): Promise<any> 
+
+    hasReadPermission(): Promise<boolean>
+
+    cleanup(): Promise<any>
+    
 };
