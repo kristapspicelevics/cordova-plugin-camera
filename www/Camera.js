@@ -176,4 +176,8 @@ cameraExport.cleanup = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'cleanup', []);
 };
 
+cameraExport.hasCameraPermission = function (successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Camera', 'hasCameraPermission', []);
+};
+
 module.exports = cameraExport;
