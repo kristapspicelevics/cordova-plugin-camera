@@ -7,6 +7,10 @@ interface Navigator {
         errorCallback: (message: string) => void,
         options?: CameraOptions
       ): void;
+      cleanup(
+        onSuccess: () => void,
+        onError: (message: string) => void): void;
+      hasCameraPermission(): void;
     };
   }
   
