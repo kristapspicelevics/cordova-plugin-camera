@@ -177,4 +177,11 @@ declare var Camera: {
         ARROW_RIGHT: number;
         ARROW_ANY: number;
     }
+
+    getPicture(options?: CameraOptions): Promise<any> 
+
+    hasReadPermission(): Promise<boolean>
+
+    cleanup(): Promise<any>
+    
 };

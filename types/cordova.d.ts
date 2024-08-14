@@ -49,5 +49,5 @@ interface Navigator {
     };
   }
   
-  declare var Camera: Camera;
+export declare var Camera: Camera;
   
