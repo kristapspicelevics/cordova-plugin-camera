@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
+import androidx.core.content.ContextCompat;
 import android.util.Base64;
 
 import org.apache.cordova.BuildHelper;
