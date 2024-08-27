@@ -218,6 +218,28 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
         return false;
     }
 
+    @PluginMethod
+    public void hasPermission(PluginCall call) {
+        if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            call.resolve();
+        } else {
+            requestAllPermissions(call, "permissionCallback");
+        }
+    }
+
+    @PermissionCallback
+    private void permissionCallback(PluginCall call) {
+        if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            call.resolve();
+        } else {
+            call.reject("Permissions not granted");
+        }
+    }
+
+    private boolean checkPermission(String permission) {
+        return ContextCompat.checkSelfPermission(getContext(), permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
