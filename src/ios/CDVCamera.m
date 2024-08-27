@@ -137,11 +137,12 @@ static NSString* toBase64(NSData* data) {
            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }
 
-- (void)hasPermission:(CDVInvokedUrlCommand *)command {
+- (void)hasPermission:(CDVInvokedUrlCommand*)command 
+{
     AVAuthorizationStatus cameraAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    BOOL hasPermission = cameraAuthStatus == AVAuthorizationStatusAuthorized;
+    BOOL checkPermission = cameraAuthStatus == AVAuthorizationStatusAuthorized;
 
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:hasPermission];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:checkPermission];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
