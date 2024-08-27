@@ -215,34 +215,26 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             callbackContext.sendPluginResult(r);
 
             return true;
+        } else if (action.equals("hasPermission")){
+            if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                PluginResult r = new PluginResult(PluginResult.Status.OK, true);
+                callbackContext.sendPluginResult(r);
+            } else {
+                PluginResult r = new PluginResult(PluginResult.Status.OK, false);
+                callbackContext.sendPluginResult(r);
+            }
+            return true;
         }
         return false;
-    }
-
-    public boolean hasPermission() {
-        if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // @PermissionCallback
-    // private void permissionCallback(PluginCall call) {
-    //     if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-    //         call.resolve();
-    //     } else {
-    //         call.reject("Permissions not granted");
-    //     }
-    // }
-
-    private boolean checkPermission(String permission) {
-        return ContextCompat.checkSelfPermission(getContext(), permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
+
+    private boolean checkPermission(String permission) {
+        return ContextCompat.checkSelfPermission(this, permission) == true;
+    }
 
     private String[] getPermissions(boolean storageOnly, int mediaType) {
         ArrayList<String> permissions = new ArrayList<>();
