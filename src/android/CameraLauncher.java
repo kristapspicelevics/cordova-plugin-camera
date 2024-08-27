@@ -219,15 +219,11 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
         return false;
     }
 
-    @PluginMethod
-    public void hasPermission() {
-        JSObject ret = new JSObject();
+    public boolean hasPermission() {
         if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            ret.put("granted", true);
-            call.resolve(ret);
+            return true;
         } else {
-            ret.put("granted", false);
-            call.resolve(ret);
+            return false;
         }
     }
 
