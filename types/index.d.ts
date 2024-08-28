@@ -41,7 +41,9 @@ interface Camera {
     //    cameraSuccess: (data: string) => void,
     //    cameraError: (message: string) => void,
     //    cameraOptions?: CameraOptions): CameraPopoverHandle;
-    hasPermission(): boolean;
+    hasPermission(
+        onSuccess: () => void,
+        onError: (message: string) => void): void;
 }
 
 interface CameraOptions {
