@@ -101,6 +101,7 @@ typedef NSUInteger CDVMediaType;
  *	quality: integer between 1 and 100
  */
 - (void)hasPermission:(CDVInvokedUrlCommand*)command;
+- (void)requestPermission:(CDVInvokedUrlCommand*)command;
 - (void)takePicture:(CDVInvokedUrlCommand*)command;
 - (void)cleanup:(CDVInvokedUrlCommand*)command;
 - (void)repositionPopover:(CDVInvokedUrlCommand*)command;

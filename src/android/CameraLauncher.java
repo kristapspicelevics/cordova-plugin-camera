@@ -216,13 +216,28 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
 
             return true;
         } else if (action.equals("hasPermission")){
-            if (checkPermission(Manifest.permission.READ_MEDIA_IMAGES) || checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if (android.os.Build.VERSION.SDK_INT >= 33 && checkPermission(Manifest.permission.READ_MEDIA_IMAGES)) {
+                PluginResult r = new PluginResult(PluginResult.Status.OK, true);
+                callbackContext.sendPluginResult(r);
+            } else if (android.os.Build.VERSION.SDK_INT < 33 && checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 PluginResult r = new PluginResult(PluginResult.Status.OK, true);
                 callbackContext.sendPluginResult(r);
             } else {
                 PluginResult r = new PluginResult(PluginResult.Status.OK, false);
                 callbackContext.sendPluginResult(r);
             }
+            return true;
+        } else if (action.equals("requestPermission")){
+            string permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+            if (android.os.Build.VERSION.SDK_INT >= 33 && checkPermission(Manifest.permission.READ_MEDIA_IMAGES)) {
+                permission = Manifest.permission.READ_MEDIA_IMAGES;
+            } else if (android.os.Build.VERSION.SDK_INT < 33 && checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+            } 
+            ActivityCompat.requestPermissions(
+                this.cordova.getActivity(),
+                new String[] { permission },
+                100);
             return true;
         }
         return false;
