@@ -236,7 +236,6 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                 PermissionHelper.requestPermissions(this, TAKE_PIC_SEC, permission);
             }
             callbackContext.success();
-            PermissionHelper.requestPermissions(this, TAKE_PIC_SEC, permission);
             return true;
         }
         return false;
