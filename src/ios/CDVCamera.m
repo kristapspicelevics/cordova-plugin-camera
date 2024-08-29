@@ -150,7 +150,7 @@ static NSString* toBase64(NSData* data) {
 {
     AVAuthorizationStatus cameraAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     
-    if (cameraAuthStatus == AVAuthorizationStatusNotDetermined || cameraAuthStatus == AVAuthorizationStatusDeclined) {
+    if (cameraAuthStatus == AVAuthorizationStatusNotDetermined) {
         // Permission has not been asked yet, request it
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:granted];
