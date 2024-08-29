@@ -42,6 +42,8 @@ interface Camera {
     //    cameraError: (message: string) => void,
     //    cameraOptions?: CameraOptions): CameraPopoverHandle;
     hasPermission(): Promise<boolean>;
+
+    requestPermission(): Promise<any>;
 }
 
 interface CameraOptions {

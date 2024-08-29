@@ -180,4 +180,8 @@ cameraExport.hasPermission = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'hasPermission', []);
 };
 
+cameraExport.requestPermission = function (successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Camera', 'requestPermission', []);
+};
+
 module.exports = cameraExport;
