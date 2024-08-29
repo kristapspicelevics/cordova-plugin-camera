@@ -176,7 +176,7 @@ cameraExport.cleanup = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'cleanup', []);
 };
 
-cameraExport.checkPermission = function (successCallback, errorCallback) {
+cameraExport.hasPermission = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'hasPermission', []);
 };
 
