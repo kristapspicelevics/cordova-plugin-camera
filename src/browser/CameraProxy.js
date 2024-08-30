@@ -124,7 +124,9 @@ function capture (success, errorCallback, opts) {
 
 module.exports = {
     takePicture,
-    cleanup: function () {}
+    cleanup: function () {},
+    hasPermission: function () {},
+    requestPermission: function () {} 
 };
 
 require('cordova/exec/proxy').add('Camera', module.exports);
