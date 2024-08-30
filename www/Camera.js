@@ -151,6 +151,14 @@ cameraExport.getPicture = function (successCallback, errorCallback, options) {
     // return new CameraPopoverHandle();
 };
 
+cameraExport.hasPermission = function (successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Camera', 'hasPermission', []);
+};
+
+cameraExport.requestPermission = function (successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Camera', 'requestPermission', []);
+};
+
 /**
  * Removes intermediate image files that are kept in temporary storage
  * after calling [`camera.getPicture`]{@link module:camera.getPicture}. Applies only when the value of
@@ -174,14 +182,6 @@ cameraExport.getPicture = function (successCallback, errorCallback, options) {
  */
 cameraExport.cleanup = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'cleanup', []);
-};
-
-cameraExport.hasPermission = function (successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'Camera', 'hasPermission', []);
-};
-
-cameraExport.requestPermission = function (successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'Camera', 'requestPermission', []);
 };
 
 module.exports = cameraExport;
