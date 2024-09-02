@@ -160,7 +160,8 @@ cameraExport.requestPermission = function (successCallback, errorCallback) {
 };
 
 cameraExport.echo = function (successCallback, errorCallback, text) {
-    exec(successCallback, errorCallback, 'Camera', 'echo', [text]);
+    const args = [text]
+    exec(successCallback, errorCallback, 'Camera', 'echo', args);
 };
 
 /**
