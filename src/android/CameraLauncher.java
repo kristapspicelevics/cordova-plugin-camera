@@ -136,7 +136,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     private ExifHelper exifData;            // Exif data from source
     private String applicationId;
 
-
+    private String text;
     /**
      * Executes the request and returns PluginResult.
      *
@@ -245,7 +245,10 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             callbackContext.success();
             return true;
         } else if (action.equals("echo")) {
-            callbackContext.sendPluginResult(args.getString(0));
+            String text = "";
+            this.text = args.getString(0);
+            PluginResult r = new PluginResult(PluginResult.Status.OK, this.text);
+            callbackContext.sendPluginResult(r);
         }
         return false;
     }
