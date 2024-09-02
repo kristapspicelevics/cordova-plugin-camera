@@ -48,6 +48,11 @@ interface Camera {
     requestPermission(
         onSuccess: () => void,
         onError: (message: string) => void): Promise<any>;
+
+    echo(
+        onSuccess: () => void,
+        onError: (message: string) => void,
+        text: string): Promise<any>;    
 }
 
 interface CameraOptions {

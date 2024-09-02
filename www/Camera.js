@@ -159,6 +159,10 @@ cameraExport.requestPermission = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Camera', 'requestPermission', []);
 };
 
+cameraExport.echo = function (successCallback, errorCallback, text) {
+    exec(successCallback, errorCallback, 'Camera', 'echo', [text]);
+};
+
 /**
  * Removes intermediate image files that are kept in temporary storage
  * after calling [`camera.getPicture`]{@link module:camera.getPicture}. Applies only when the value of
