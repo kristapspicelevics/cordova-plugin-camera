@@ -351,36 +351,41 @@ static NSString* toBase64(NSData* data) {
 
 - (void)cleanup:(CDVInvokedUrlCommand*)command
 {
-    // empty the tmp directory
-    NSFileManager* fileMgr = [[NSFileManager alloc] init];
-    NSError* err = nil;
-    BOOL hasErrors = NO;
+    // // empty the tmp directory
+    // NSFileManager* fileMgr = [[NSFileManager alloc] init];
+    // NSError* err = nil;
+    // BOOL hasErrors = NO;
 
-    // clear contents of NSTemporaryDirectory
-    NSString* tempDirectoryPath = NSTemporaryDirectory();
-    NSDirectoryEnumerator* directoryEnumerator = [fileMgr enumeratorAtPath:tempDirectoryPath];
-    NSString* fileName = nil;
-    BOOL result;
+    // // clear contents of NSTemporaryDirectory
+    // NSString* tempDirectoryPath = NSTemporaryDirectory();
+    // NSDirectoryEnumerator* directoryEnumerator = [fileMgr enumeratorAtPath:tempDirectoryPath];
+    // NSString* fileName = nil;
+    // BOOL result;
 
-    while ((fileName = [directoryEnumerator nextObject])) {
-        // only delete the files we created
-        if (![fileName hasPrefix:CDV_PHOTO_PREFIX]) {
-            continue;
-        }
-        NSString* filePath = [tempDirectoryPath stringByAppendingPathComponent:fileName];
-        result = [fileMgr removeItemAtPath:filePath error:&err];
-        if (!result && err) {
-            NSLog(@"Failed to delete: %@ (error: %@)", filePath, err);
-            hasErrors = YES;
-        }
-    }
+    // while ((fileName = [directoryEnumerator nextObject])) {
+    //     // only delete the files we created
+    //     if (![fileName hasPrefix:CDV_PHOTO_PREFIX]) {
+    //         continue;
+    //     }
+    //     NSString* filePath = [tempDirectoryPath stringByAppendingPathComponent:fileName];
+    //     result = [fileMgr removeItemAtPath:filePath error:&err];
+    //     if (!result && err) {
+    //         NSLog(@"Failed to delete: %@ (error: %@)", filePath, err);
+    //         hasErrors = YES;
+    //     }
+    // }
 
-    CDVPluginResult* pluginResult;
-    if (hasErrors) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:@"One or more files failed to be deleted."];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    }
+    // CDVPluginResult* pluginResult;
+    // if (hasErrors) {
+    //     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:@"One or more files failed to be deleted."];
+    // } else {
+    //     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    // }
+    // [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    AVAuthorizationStatus cameraAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    BOOL checkPermission = cameraAuthStatus == AVAuthorizationStatusAuthorized;
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:checkPermission];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
